@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     private var verbs: List<Verb>? = null
 
     private fun loadVerb(verb: String, gson: Gson): Verb {
-        val firstLetter: Char = verb[0]
+        val firstLetter = verb[0]
         val path = "verbs/italian/content/$firstLetter/$verb.json"
         val rawResource = assets.open(path)
         val reader = BufferedReader(InputStreamReader(rawResource))
