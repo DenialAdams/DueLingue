@@ -1,0 +1,1 @@
+Verb data taken from [Ian Hamlin](https://github.com/ian-hamlin/verb-data) under the [Creative Commons Attribution-ShareAlike License](https://creativecommons.org/licenses/by-sa/3.0/).
