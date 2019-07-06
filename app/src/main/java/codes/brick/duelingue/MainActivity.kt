@@ -1,8 +1,10 @@
 package codes.brick.duelingue
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import java.io.BufferedReader
@@ -44,6 +46,17 @@ class MainActivity : AppCompatActivity() {
                     else -> throw e
                 }
             }
+        }
+
+        val quizBtn = findViewById<Button>(R.id.button_quiz)
+        quizBtn?.setOnClickListener {
+            val intent = Intent(this, QuizOptionsActivity::class.java)
+            startActivity(intent)
+        }
+        val showBtn = findViewById<Button>(R.id.button_show)
+        showBtn?.setOnClickListener {
+            val intent = Intent(this, ShowOptionsActivity::class.java)
+            startActivity(intent)
         }
     }
 }
