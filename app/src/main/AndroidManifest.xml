@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".ShowOptionsActivity">
         </activity>
+        <activity android:name=".ShowActivity">
+        </activity>
     </application>
 
 </manifest>

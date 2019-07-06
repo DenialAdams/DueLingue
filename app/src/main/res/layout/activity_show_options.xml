@@ -8,13 +8,48 @@
         tools:context=".MainActivity">
 
     <TextView
+            android:text="Group(s):"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Show"
+            android:id="@+id/textView2" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="301dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Vocab"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.068"
             android:textSize="36sp" app:layout_constraintHorizontal_bias="0.498"/>
+    <Spinner
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/show_options_groups"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="353dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
+    <Button
+            android:text="SHOW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_options_show"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="448dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="161dp"
+            android:layout_marginEnd="162dp" app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+            android:text="Language:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="168dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
+    <Spinner
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/show_options_lang"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="219dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
