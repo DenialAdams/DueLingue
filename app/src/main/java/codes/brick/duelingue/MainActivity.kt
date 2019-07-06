@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.JsonParseException
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -31,9 +32,15 @@ class MainActivity : AppCompatActivity() {
                 val verb = loadVerb(it, gson)
                 Log.i("app", "Successfully loaded verb: $it")
                 verb
-            } catch(e: IOException) {
-                Log.e("app", "Failed to load verb: $it", e)
-                null
+
+            } catch(e: Exception) {
+                when(e) {
+                    is IOException, is JsonParseException -> {
+                        Log.e("app", "Failed to load verb: $it", e)
+                        null
+                    }
+                    else -> throw e
+                }
             }
         }
     }
