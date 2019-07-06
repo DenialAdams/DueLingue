@@ -12,6 +12,8 @@ import java.io.InputStreamReader
 
 class MainActivity : AppCompatActivity() {
 
+    private val tag = "MainActivity"
+
     private var verbs: List<Verb>? = null
 
     private fun loadVerb(verb: String, gson: Gson): Verb {
@@ -30,13 +32,13 @@ class MainActivity : AppCompatActivity() {
         verbs = verbsToLoad.mapNotNull {
             try {
                 val verb = loadVerb(it, gson)
-                Log.i("app", "Successfully loaded verb: $it")
+                Log.i(tag, "Successfully loaded verb: $it")
                 verb
 
             } catch(e: Exception) {
                 when(e) {
                     is IOException, is JsonParseException -> {
-                        Log.e("app", "Failed to load verb: $it", e)
+                        Log.e(tag, "Failed to load verb: $it", e)
                         null
                     }
                     else -> throw e
