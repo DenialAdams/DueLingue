@@ -3,8 +3,13 @@ package codes.brick.duelingue
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.util.Log
 import android.widget.Button
+import codes.brick.duelingue.endpoint.EndpointDataManager
+import codes.brick.duelingue.endpoint.EndpointLangData
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import java.io.BufferedReader
@@ -18,35 +23,26 @@ class MainActivity : AppCompatActivity() {
 
     private var verbs: List<Verb>? = null
 
-    private fun loadVerb(verb: String, gson: Gson): Verb {
-        val firstLetter = verb[0]
-        val path = "verbs/italian/content/$firstLetter/$verb.json"
-        val rawResource = assets.open(path)
-        val reader = BufferedReader(InputStreamReader(rawResource))
-        return gson.fromJson(reader, Verb::class.java)
+    private val endpointDataManager: EndpointDataManager = EndpointDataManager()
+
+    private var endpointData: Map<String, LangData>? = null
+
+    private val handler: Handler = object : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(inputMessage: Message) {
+            endpointData = inputMessage.obj as Map<String, LangData>
+            val quizBtn = findViewById<Button>(R.id.button_quiz)
+            quizBtn?.isEnabled = true
+            val showBtn = findViewById<Button>(R.id.button_show)
+            showBtn?.isEnabled = true
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val verbsToLoad = listOf("stare", "avere")
-        val gson = Gson()
-        verbs = verbsToLoad.mapNotNull {
-            try {
-                val verb = loadVerb(it, gson)
-                Log.i(tag, "Successfully loaded verb: $it")
-                verb
 
-            } catch(e: Exception) {
-                when(e) {
-                    is IOException, is JsonParseException -> {
-                        Log.e(tag, "Failed to load verb: $it", e)
-                        null
-                    }
-                    else -> throw e
-                }
-            }
-        }
+        val gson = Gson()
+        endpointDataManager.initialFetch(gson, this)
 
         val quizBtn = findViewById<Button>(R.id.button_quiz)
         quizBtn?.setOnClickListener {

@@ -10,3 +10,13 @@ data class Verb(
     @SerializedName("word")
     val word: String
 )
+
+data class Conjugation(
+    @SerializedName("group")
+    val group: String,
+    @SerializedName("value")
+    val value: String
+) {
+    @SerializedName("form")
+    val form: String? = null
+}
